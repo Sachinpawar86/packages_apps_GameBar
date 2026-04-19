@@ -94,8 +94,8 @@ fun GameBarSettingsScreen(
     fun readGestureAction(key: String, defaultValue: String): String {
         val raw = prefs.getString(key, defaultValue) ?: defaultValue
         return if (raw == "capture_logs") {
-            putString(key, "no_action")
-            "no_action"
+            putString(key, "toggle_fps_logging")
+            "toggle_fps_logging"
         } else {
             raw
         }
@@ -214,6 +214,7 @@ fun GameBarSettingsScreen(
     val splitModeOptions = listOf(SelectOption("side_by_side", "Side-by-Side"), SelectOption("stacked", "Stacked"))
     val gestureOptions = listOf(
         SelectOption("no_action", "No Action"),
+        SelectOption("toggle_fps_logging", "Start/Stop FPS Logging"),
         SelectOption("adjust_length", "Length Adjustment Mode"),
         SelectOption("toggle_format", "Toggle Full/Minimal Format"),
         SelectOption("open_settings", "Open GameBar Settings"),

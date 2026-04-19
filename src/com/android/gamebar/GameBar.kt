@@ -214,6 +214,13 @@ class GameBar private constructor(context: Context) {
             "screen_record" -> {
                 toggleScreenRecording()
             }
+            "toggle_fps_logging" -> {
+                context.startService(
+                    Intent(context, FpsRecordControlOverlayService::class.java).apply {
+                        action = FpsRecordControlOverlayService.ACTION_TOGGLE_RECORDING
+                    }
+                )
+            }
             "adjust_length" -> {
                 overlayWidthEditing = !overlayWidthEditing
                 updateWidthEditVisualState()
@@ -330,8 +337,8 @@ class GameBar private constructor(context: Context) {
     ): String {
         val value = prefs.getString(key, defaultValue) ?: defaultValue
         if (value == "capture_logs") {
-            prefs.edit().putString(key, "no_action").apply()
-            return "no_action"
+            prefs.edit().putString(key, "toggle_fps_logging").apply()
+            return "toggle_fps_logging"
         }
         return value
     }
